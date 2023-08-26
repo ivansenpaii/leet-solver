@@ -47,4 +47,4 @@ class Pay {
 
 $solution = new Pay();
 $solution->solve();
-?>
+
