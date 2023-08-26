@@ -11,17 +11,22 @@ class Pay {
 
     private function calculatePayment($n, $prices): int
     {
-        $count = array();
+        $counts = array();
+
         for ($i = 0; $i < $n; $i++) {
-            if (!isset($count[$prices[$i]])) {
-                $count[$prices[$i]] = 0;
+            $price = $prices[$i];
+            if (!isset($counts[$price])) {
+                $counts[$price] = 0;
             }
-            $count[$prices[$i]]++;
+            $counts[$price]++;
         }
 
         $totalPayment = 0;
-        foreach ($count as $price => $quantity) {
-            $totalPayment += ($quantity - floor($quantity / 3)) * $price;
+
+
+        foreach ($counts as $price => $count) {
+            $discountedCount = $count - floor($count / 3);
+            $totalPayment += $discountedCount * $price;
         }
 
         return $totalPayment;
@@ -42,3 +47,4 @@ class Pay {
 
 $solution = new Pay();
 $solution->solve();
+?>
